@@ -24,7 +24,8 @@ import javax.persistence.OneToOne;
 @NamedQueries({
     @NamedQuery(name = "Course.findById", query = "select c from Course c where c.id = :id"),
     @NamedQuery(name = "Course.findByName", query = "select c from Course c where c.name = :name"),
-    @NamedQuery(name = "Course.findAll", query = "select c from Course c")})
+    @NamedQuery(name = "Course.findAll", query = "select c from Course c"),
+@NamedQuery(name = "Course.findByCourseId", query = "select c from Course c where c.courseId = :courseId")})
 public class Course extends BaseEntity implements Serializable {
 
     /**

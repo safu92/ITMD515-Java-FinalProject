@@ -5,6 +5,7 @@
  */
 package edu.iit.sat.itmd4515.smatches.mp4.service;
 
+import edu.iit.sat.itmd4515.smatches.mp4.domain.Course;
 import edu.iit.sat.itmd4515.smatches.mp4.domain.University;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -30,6 +31,14 @@ public class UniversityService extends AbstractService<University> {
     @Override
     public List<University> findAll() {
         return getEntityManager().createNamedQuery("University.findAll").getResultList();
+    }
+    
+    
+    public University findByName(String name) {
+        return em.createNamedQuery("University.findByName",
+                University.class)
+                .setParameter("name", name)
+                .getSingleResult();
     }
 
 }

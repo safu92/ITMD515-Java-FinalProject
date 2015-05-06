@@ -5,12 +5,12 @@
  */
 package edu.iit.sat.itmd4515.smatches.mp4.web;
 
-import edu.iit.sat.itmd4515.smatches.mp4.domain.Course;
 import edu.iit.sat.itmd4515.smatches.mp4.domain.Professor;
-import edu.iit.sat.itmd4515.smatches.mp4.domain.Student;
-import edu.iit.sat.itmd4515.smatches.mp4.service.ProfessorService;
+import edu.iit.sat.itmd4515.smatches.mp4.domain.University;
+import edu.iit.sat.itmd4515.smatches.mp4.service.UniversityService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,14 +20,15 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author smatches
+ * @author ALLAH
  */
-@WebServlet(name = "ProfessorPortalTestServlet", urlPatterns = {"/professorPortal", "/professorPortal/"})
-public class ProfessorPortalTestServlet extends HttpServlet {
+@WebServlet(name = "NewAccount", urlPatterns = {"/newAccount","/newAccount/"})
+public class NewAccount extends HttpServlet {
 
-    @EJB
-    private ProfessorService professorService;
-
+    
+      @EJB
+      private UniversityService uniservice;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,19 +40,15 @@ public class ProfessorPortalTestServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    
         
-                       if (request.isUserInRole("professor")) {
-             Professor p = professorService.findByUsername(request.getRemoteUser());
+            List<University> u = uniservice.findAll();
         response.setContentType("text/html");
-        request.setAttribute("user",p.getUser().getUserName());
-        request.setAttribute("usertype","0");
-        request.setAttribute("name", p.getFirstName());
-        request.setAttribute("birthdate", p.getBirthDate());
-        request.setAttribute("university", p.getUniversity().getName());
-        request.getRequestDispatcher("/WEB-INF/professorPortal/myProfile.jsp").forward(request, response);
+        request.setAttribute("universities", u);
+        request.getRequestDispatcher("/newAccount.jsp").forward(request, response);
             }
-        }
-  
+        
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

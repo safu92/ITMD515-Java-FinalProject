@@ -6,8 +6,10 @@
 package edu.iit.sat.itmd4515.smatches.mp4.web;
 
 import edu.iit.sat.itmd4515.smatches.mp4.domain.Course;
+import edu.iit.sat.itmd4515.smatches.mp4.domain.Professor;
 import edu.iit.sat.itmd4515.smatches.mp4.domain.Student;
 import edu.iit.sat.itmd4515.smatches.mp4.service.CourseService;
+import edu.iit.sat.itmd4515.smatches.mp4.service.ProfessorService;
 import edu.iit.sat.itmd4515.smatches.mp4.service.StudentService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,6 +30,9 @@ public class StudentPortalTestServlet extends HttpServlet {
     @EJB
     private StudentService studentService;
 
+    @EJB
+    private ProfessorService professorService;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,41 +44,18 @@ public class StudentPortalTestServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // response.setContentType("text/html;charset=UTF-8");
-        //get all the details of student and print them
-        //try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-         //   out.println("<!DOCTYPE html>");
-          //  out.println("<html>");
-           // out.println("<head>");
-           // out.println("<title>Servlet StudentPortalTestServlet</title>");
-           // out.println("</head>");
-           // out.println("<body>");
-           // out.println("<h1>Servlet StudentPortalTestServlet at " + request.getContextPath() + "</h1>");
-
-            //out.println("<h2>" + request.getRemoteUser() + "</h2>");
-
+       
             if (request.isUserInRole("student")) {
              Student s = studentService.findByUsername(request.getRemoteUser());
-              //  out.println("<ul>");
-            //    out.println("<li>Name: "  + s.getFirstName() + " " + s.getLastName() + "</li>");
-          //      out.println("<li>Birth Date: " + s.getBirthDate() + "</li>");
-        //        out.println("<li>University: " + s.getUniversity().getName() + "</li>");
-      //          out.println("<li><a href='"+ request.getContextPath() +"/coursePortal'>My Courses</a></li>");
-    //            out.println("</ul>");
-  //        }
-//
-//            out.println("<a href=\"" + request.getContextPath() + "/logout\">Logout</a>");
-
-         //   out.println("</body>");
-        //    out.println("</html>");
-       // }
         response.setContentType("text/html");
+        request.setAttribute("user",s.getUser().getUserName());
+        request.setAttribute("usertype","1");
         request.setAttribute("name", s.getFirstName());
         request.setAttribute("birthdate", s.getBirthDate());
         request.setAttribute("university", s.getUniversity().getName());
-        request.getRequestDispatcher("/WEB-INF/studentPortal/welcome.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/studentPortal/myProfile.jsp").forward(request, response);
             }
+            
 
     }
 

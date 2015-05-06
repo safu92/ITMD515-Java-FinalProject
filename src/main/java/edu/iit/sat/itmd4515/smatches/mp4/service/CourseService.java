@@ -6,30 +6,82 @@
 package edu.iit.sat.itmd4515.smatches.mp4.service;
 
 import edu.iit.sat.itmd4515.smatches.mp4.domain.Course;
+import edu.iit.sat.itmd4515.smatches.mp4.domain.Student;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author smatches
  */
 @Stateless
-public class CourseService extends AbstractService<Course> {
+public class CourseService {
+
+     @PersistenceContext(unitName = "smatchesPU")
+    private EntityManager em;
 
     /**
-     *constructor
+     * constructor
      */
     public CourseService() {
-        super(Course.class);
     }
 
     /**
-     *find all method which finds all courses
+     * create student
+     * @param s
+     */
+    public void create(Course c) {
+        em.persist(c);
+    }
+
+    /**
+     * update student
+     * @param s
+     */
+    public void update(Course c) {
+        em.merge(c);
+    }
+
+    /**
+     * remove student
+     * @param s
+     */
+    public void remove(Course c) {
+        em.remove(c);
+    }
+
+    /**
+     * find student by its id
+     * @param id
      * @return
      */
-    @Override
+    public Course find(long id) {
+        return em.find(Course.class, id);
+    }
+
+    /**
+     * find all method which finds all students
+     * @return
+     */
     public List<Course> findAll() {
-        return getEntityManager().createNamedQuery("Course.findAll").getResultList();
+        return em.createNamedQuery("Course.findAll",
+                Course.class).getResultList();
+    }
+
+    /**
+     * find by username which finds user by its username
+     * @param userName username passed which needs to be find
+     * @return the student which found
+     */
+
+    
+    public Course findByCourseId(String courseId) {
+        return em.createNamedQuery("Course.findByCourseId",
+                Course.class)
+                .setParameter("courseId", courseId)
+                .getSingleResult();
     }
 
 }

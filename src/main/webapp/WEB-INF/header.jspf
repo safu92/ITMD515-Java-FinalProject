@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Safdar | Welcome to My Application</title>
+        <title>${requestScope.user} | Welcome to Lets Meet</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/foundation.css" />
         <script src="${pageContext.request.contextPath}/resources/js/vendor/modernizr.js"></script>
     </head>
@@ -15,7 +15,7 @@
         <nav class="top-bar" data-topbar role="navigation">
             <ul class="title-area">
                 <li class="name">
-                    <h1><a href="#">Safdar</a></h1>
+                    <h1><a href="#">Lets Meet</a></h1>
                 </li>
                 <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
                 <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -27,21 +27,19 @@
 
                 <!-- Left Nav Section -->
                 <ul class="left">
-                    <li class="has-dropdown"><a href="#">Departments</a>
+                    
+                    <li class="has-dropdown"><a href="#">${requestScope.user}</a>
                         <ul class="dropdown">
-                            <li><a href="${pageContext.request.contextPath}/departments">View Departments</a></li>
-                            <li><a href="${pageContext.request.contextPath}/department">Add Department</a></li>
-                            <li><a href="${pageContext.request.contextPath}/departments">Update Department</a></li>
-                            <li><a href="${pageContext.request.contextPath}/department/delete">Delete Department</a></li>
+                            <li><a href="${pageContext.request.contextPath}/studentPortal">My Profile</a></li>
+                            <li><a href="${pageContext.request.contextPath}/myCourses">My Courses</a></li>
+                            <c:if test="${requestScope.usertype == 1}">
+                            <li><a href="${pageContext.request.contextPath}/myMeetups">My Meetups</a></li>
+                            <li><a href="${pageContext.request.contextPath}/employees">Add Course</a></li>
+                            <li><a href="${pageContext.request.contextPath}/employee">New Meetup</a></li>
+                            </c:if>
                         </ul>
                     </li>
-                    <li class="has-dropdown"><a href="#">Employees</a>
-                        <ul class="dropdown">
-                            <li><a href="${pageContext.request.contextPath}/employees">View Employees</a></li>
-                            <li><a href="${pageContext.request.contextPath}/employee">Add Employee</a></li>
-                            <li><a href="${pageContext.request.contextPath}/employees">Update Employee</a></li>
-                            <li><a href="${pageContext.request.contextPath}/employee/delete">Delete Employee</a></li>
-                        </ul>
+                    <li class="has-dropdown"><a href="${pageContext.request.contextPath}/logout">Logout</a>
                     </li>
                 </ul>
             </section>

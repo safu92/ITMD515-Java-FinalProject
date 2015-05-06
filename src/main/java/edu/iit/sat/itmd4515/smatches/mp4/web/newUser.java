@@ -5,11 +5,19 @@
  */
 package edu.iit.sat.itmd4515.smatches.mp4.web;
 
-import edu.iit.sat.itmd4515.smatches.mp4.domain.Course;
 import edu.iit.sat.itmd4515.smatches.mp4.domain.Student;
+import edu.iit.sat.itmd4515.smatches.mp4.domain.University;
+import edu.iit.sat.itmd4515.smatches.mp4.service.ProfessorService;
 import edu.iit.sat.itmd4515.smatches.mp4.service.StudentService;
+import edu.iit.sat.itmd4515.smatches.mp4.service.UniversityService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,14 +27,19 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author smatches
+ * @author ALLAH
  */
-@WebServlet(name = "CoursePortalTestServlet", urlPatterns = {"/coursePortal","/coursePortal/"})
-public class CoursePortalTestServlet extends HttpServlet {
+@WebServlet(name = "newUser", urlPatterns = {"/newUser","/newUser/"})
+public class newUser extends HttpServlet {
 
     @EJB
     private StudentService studentService;
     
+    @EJB
+    private ProfessorService professorService;
+    
+    @EJB
+    private UniversityService uniService;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,41 +50,32 @@ public class CoursePortalTestServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        //show all the courses taken by the user
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CoursePortalTestServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CoursePortalTestServlet at " + request.getContextPath() + "</h1>");
-            
-            if (request.isUserInRole("student")) {
-                Student s = studentService.findByUsername(request.getRemoteUser());
-                out.println("You have taken the following courses:");
-                out.println("<ul>");
+    
+    String firstName = request.getParameter("firstName");
+    String lastName = request.getParameter("lastName");
+    String birthDate = request.getParameter("birthDate");
+    String university = request.getParameter("university");
+    String userType = request.getParameter("userType");
+    Date birth = null;
+    DateFormat formatter = null;
+    formatter = new SimpleDateFormat("yyyy-mm-dd");
+    birth = (Date) formatter.parse(birthDate); // birtDate is a string
 
-                for (Course c : s.getCourses()) {
-                    
-                out.println("<li>" + c.getName() + "</li>");
-                    
-                        
-                }
-                
-                out.println("</ul>");
-                
-                out.println("<a href='" + request.getContextPath() + "/studentPortal'>My Profile</a><br/><br/>");
-            }
-
-            out.println("<a href=\"" + request.getContextPath() + "/logout\">Logout</a>");
-
-            out.println("</body>");
-            out.println("</html>");
-        }
+if(userType.equals("Student")){
+    Student s = new Student();
+    University u = uniService.findByName(university);
+    System.out.println(u.getName());
+    s.setFirstName(firstName);
+    s.setLastName(lastName);
+    s.setUniversity(u);
+    s.setBirthDate(birth);
+    
+    studentService.create(s);
+		PrintWriter out = response.getWriter();
+                out.println("Account Created");
+}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -86,7 +90,12 @@ public class CoursePortalTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
 
     /**
@@ -100,7 +109,11 @@ public class CoursePortalTestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

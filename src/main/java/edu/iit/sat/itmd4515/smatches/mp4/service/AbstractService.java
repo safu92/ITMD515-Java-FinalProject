@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 public abstract class AbstractService<T> {
 
     @PersistenceContext(unitName = "smatchesPU")
-    private EntityManager em;
+     EntityManager em;
 
     private final Class<T> entityClass;
     

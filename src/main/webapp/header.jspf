@@ -8,7 +8,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Safdar | Extra Credit Work</title>
+        <title>Lets Meet | Welcome to Lets Meet</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/foundation.css" />
         <script src="${pageContext.request.contextPath}/resources/js/vendor/modernizr.js"></script>
     </head>
@@ -17,7 +17,7 @@
         <nav class="top-bar" data-topbar role="navigation">
             <ul class="title-area">
                 <li class="name">
-                    <h1><a href="#">Safdar Extra Credit Work</a></h1>
+                    <h1><a href="#">Lets Meet</a></h1>
                 </li>
                 <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
                 <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -28,46 +28,14 @@
                
                 <!-- Left Nav Section -->
                 <ul class="left">
-                    <li class="has-dropdown"><a href="#">Departments</a>
+                    <li class="has-dropdown"><a href="#">Login</a>
                         <ul class="dropdown">
-                            <li><a href="viewDepartment.jsp">View Departments</a></li>
-                            <li><a href="newDepartment.jsp">Add Department</a></li>
-                            <li><a href="updateDepartment.jsp">Update Department</a></li>
-                            <li><a href="deleteDepartment.jsp">Delete Department</a></li>
+                            <li><a href="${pageContext.request.contextPath}/studentPortal">Student</a></li>
+                            <li><a href="${pageContext.request.contextPath}/professorPortal">Professor</a></li>
                         </ul>
                     </li>
-                    <li class="has-dropdown"><a href="#">Employees</a>
-                        <ul class="dropdown">
-                            <li><a href="viewEmployee.jsp">View Employees</a></li>
-                            <li><a href="newEmployee.jsp">Add Employee</a></li>
-                            <li><a href="updateEmployee.jsp">Update Employee</a></li>
-                            <li><a href="deleteEmployee.jsp">Delete Employee</a></li>
-                        </ul>
+                    <li class="has-dropdown"><a href="${pageContext.request.contextPath}/newAccount">New User ?</a>
                     </li>
                 </ul>
             </section>
         </nav>     
-
-        <c:if test="${not empty requestScope.messages}">
-            <h2>Messages passed back from the controller layer in request scope:</h2>
-            <ul>
-                <c:forEach items="${requestScope.messages}" var="message">
-                    <li>
-                        <strong><c:out value="${message.key}"/>: ${message.value}</strong>
-                    </li>
-                </c:forEach>
-            </ul>
-            
-            
-        </c:if>
-<br/><br/><br/>
-        <c:if test="${not empty requestScope.violations}">
-            <h2>Violations passed back from the controller layer in request scope:</h2>
-            <ul>
-                <c:forEach items="${requestScope.violations}" var="violation">
-                    <li>
-                        <strong><c:out value="${violation.propertyPath}"/>: ${violation.message}</strong>
-                    </li>
-                </c:forEach>
-            </ul>
-        </c:if>
