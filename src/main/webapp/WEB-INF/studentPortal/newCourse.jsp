@@ -2,6 +2,9 @@
 <center>
     
     <h1>Register New Course</h1><br><br>
+    <c:if test="${not empty requestScope.message}">
+        <h2>${requestScope.message}</h2>
+    </c:if>
         <form action="${pageContext.request.contextPath}/addCourse" method="get">
         <div class="row">
             <div class="large-12 columns">

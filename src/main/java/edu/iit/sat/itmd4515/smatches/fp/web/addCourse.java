@@ -11,6 +11,7 @@ import edu.iit.sat.itmd4515.smatches.fp.service.CourseService;
 import edu.iit.sat.itmd4515.smatches.fp.service.StudentService;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,15 +23,18 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ALLAH
  */
-@WebServlet(name = "newCourse", urlPatterns = {"/newCourse","/newCourse/"})
-public class newCourse extends HttpServlet {
+@WebServlet(name = "addCourse", urlPatterns = {"/addCourse","/addCourse/"})
+public class addCourse extends HttpServlet {
+
     
+     private static final Logger LOG = Logger.getLogger(addCourse.class.getName());
+
     @EJB
     private CourseService courseService;
     
     @EJB
     private StudentService studentService;
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,17 +46,22 @@ public class newCourse extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            if (request.isUserInRole("student")) {
+                    if (request.isUserInRole("student")) {
+                        List<Course> courses = courseService.findAll();
                 Student s = studentService.findByUsername(request.getRemoteUser());
-        List<Course> c = courseService.findAll();
-        response.setContentType("text/html");
-          request.setAttribute("user",s.getUser().getUserName());
-                request.setAttribute("usertype","1");
-        request.setAttribute("courses", c);
-        request.getRequestDispatcher("/WEB-INF/studentPortal/newCourse.jsp").forward(request, response);
-                    }
-            }
-    
+                Course c = courseService.findByName(request.getParameter("course"));
+                LOG.info(c.getName());
+       s.getCourses().add(c);
+       c.getStudents().add(s);
+       studentService.update(s);
+       request.setAttribute("message", "Course Registered Successfully!");
+       request.setAttribute("user",s.getUser().getUserName());
+       request.setAttribute("usertype","1");
+       request.setAttribute("courses", courses);
+       request.getRequestDispatcher("/WEB-INF/studentPortal/newCourse.jsp").forward(request, response);
+
+    }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

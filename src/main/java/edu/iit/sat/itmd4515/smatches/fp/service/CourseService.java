@@ -71,7 +71,7 @@ public class CourseService {
 
     
      public Course findByName(String name) {
-        return em.createNamedQuery("C.findByName",
+        return em.createNamedQuery("Course.findByName",
                 Course.class)
                 .setParameter("name", name)
                 .getSingleResult();
