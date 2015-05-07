@@ -7,6 +7,23 @@
             
         <div class="row">
             <div class="large-12 columns">
+                <label>Username<br/><br/>
+                     
+                    <input type="text" placeholder="Username" id="username" name="username" />
+                
+                </label>
+            </div>
+            
+            <div class="large-12 columns">
+                <label>Password<br/><br/>
+                     
+                    <input type="password" placeholder="Password" id="password" name="password" />
+                
+                </label>
+            </div>
+            
+            
+            <div class="large-12 columns">
                 <label>First Name<br/><br/>
                      
                     <input type="text" placeholder="First Name" id="firstName" name="firstName" />
@@ -21,7 +38,7 @@
                 </label>
             </div>
                 <div class="large-12 columns">
-                <label>Birth Date<br/><br/>
+                <label>Birth Date (yyyy-mm-dd)<br/><br/>
                     <input type="date" id="birthDate" name="birthDate" />
                     
                 </label>

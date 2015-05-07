@@ -34,7 +34,7 @@
                             <li><a href="${pageContext.request.contextPath}/professorPortal">Professor</a></li>
                         </ul>
                     </li>
-                    <li class="has-dropdown"><a href="${pageContext.request.contextPath}/newAccount">New User ?</a>
+                    <li><a href="${pageContext.request.contextPath}/newAccount">Create New Account</a>
                     </li>
                 </ul>
             </section>
