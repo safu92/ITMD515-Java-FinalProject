@@ -5,17 +5,11 @@
  */
 package edu.iit.sat.itmd4515.smatches.fp.web;
 
+import edu.iit.sat.itmd4515.smatches.fp.domain.Meetup;
 import edu.iit.sat.itmd4515.smatches.fp.domain.Student;
-import edu.iit.sat.itmd4515.smatches.fp.domain.University;
-import edu.iit.sat.itmd4515.smatches.fp.domain.security.Group;
-import edu.iit.sat.itmd4515.smatches.fp.domain.security.User;
-import edu.iit.sat.itmd4515.smatches.fp.service.GroupService;
-import edu.iit.sat.itmd4515.smatches.fp.service.ProfessorService;
+import edu.iit.sat.itmd4515.smatches.fp.service.MeetupService;
 import edu.iit.sat.itmd4515.smatches.fp.service.StudentService;
-import edu.iit.sat.itmd4515.smatches.fp.service.UniversityService;
-import edu.iit.sat.itmd4515.smatches.fp.service.UserService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,25 +25,16 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ALLAH
+ * @author smatches
  */
-@WebServlet(name = "newUser", urlPatterns = {"/newUser","/newUser/"})
-public class newUser extends HttpServlet {
+@WebServlet(name = "addMeetup", urlPatterns = {"/addMeetup","/addMeetup/"})
+public class addMeetup extends HttpServlet {
 
     @EJB
+    private MeetupService meetupService;
+    
+    @EJB
     private StudentService studentService;
-    
-    @EJB
-    private ProfessorService professorService;
-    
-    @EJB
-    private UniversityService uniService;
-    
-    @EJB
-    private GroupService groupService;
-    
-    @EJB
-    private UserService userService;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,39 +46,30 @@ public class newUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
-        response.setContentType("text/html;charset=UTF-8");
-    
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-    String firstName = request.getParameter("firstName");
-    String lastName = request.getParameter("lastName");
-    String birthDate = request.getParameter("birthDate");
-    String university = request.getParameter("university");
-    String userType = request.getParameter("userType");
-    Date birth = null;
+        
+        String date = request.getParameter("date");
+        String place = request.getParameter("place");
+    String topic = request.getParameter("topic");
+    Date newDate = null;
     DateFormat formatter = null;
     formatter = new SimpleDateFormat("yyyy-mm-dd");
-    birth = (Date) formatter.parse(birthDate); // birtDate is a string
-    User user = new User(username,password);
+    newDate = (Date) formatter.parse(date); // birtDate is a string
 
 
-if(userType.equals("Student")){
-    Group group = groupService.findByName("STUDENT");
-    user.addGroup(group);
-    Student s = new Student();
-    University u = uniService.findByName(university);
-    s.setFirstName(firstName);
-    s.setLastName(lastName);
-    s.setUniversity(u);
-    s.setBirthDate(birth);
-    s.setUser(user);
+    Meetup m = new Meetup(newDate, place, topic);
+                if (request.isUserInRole("student")) {
+             Student s = studentService.findByUsername(request.getRemoteUser());
+        response.setContentType("text/html");
+        request.setAttribute("user",s.getUser().getUserName());
+        request.setAttribute("usertype","1");
+                }
     
-    userService.create(user);
-    studentService.create(s);
-    request.setAttribute("studentmessage", "Account Created!");
-    request.getRequestDispatcher("/newAccount.jsp").forward(request, response);
+    meetupService.create(m);
+    request.setAttribute("meetupcreated", "Meetup Created!");
+    request.getRequestDispatcher("/WEB-INF/meetupPortal/newMeetup.jsp").forward(request, response);
 }
-    }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -110,9 +86,8 @@ if(userType.equals("Student")){
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(newMeetup.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
     }
 
     /**
@@ -129,7 +104,7 @@ if(userType.equals("Student")){
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(newMeetup.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
