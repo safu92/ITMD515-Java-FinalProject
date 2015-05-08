@@ -73,15 +73,19 @@ public class DatabasePopulator {
 
         Group student = new Group("STUDENT", "Students Group");
         Group professor = new Group("PROFESSOR", "Professors Group");
+        Group master = new Group("ADMIN", "Admins Group");
 
         User safu = new User("safu", "abc123");
         User test = new User("test", "test");
         User john = new User("john", "abc123");
         User scott = new User("scott", "scott");
+        User admin = new User("admin", "admin");
+        
         test.addGroup(student);
         john.addGroup(student);
         safu.addGroup(professor);
         scott.addGroup(professor);
+        admin.addGroup(master);
         
         Course c1 = new Course("Advance Software Development", "ITMD515");
         Course c2 = new Course("Web Development", "ITMD562");
@@ -131,6 +135,7 @@ public class DatabasePopulator {
         
         groupService.create(student);
         groupService.create(professor);
+        groupService.create(master);
 
         courseService.create(c1);
         courseService.create(c2);
@@ -141,6 +146,7 @@ public class DatabasePopulator {
         userService.create(john);
         userService.create(safu);
         userService.create(scott);
+        userService.create(admin);
         
         studentService.create(s1);
         studentService.create(s2);

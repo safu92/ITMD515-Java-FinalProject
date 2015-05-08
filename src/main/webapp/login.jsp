@@ -2,6 +2,18 @@
 <%@include file="/header.jspf" %>
 <center>
     <br><br><br>
+    <% if (request.isUserInRole("student")) { %>
+    <h2>Welcome <% out.println(request.getRemoteUser()); %></h2>
+    <a href="${pageContext.request.contextPath}/studentPortal"><button class="button">My Account</button></a>
+    <a href="${pageContext.request.contextPath}/myCourses"><button class="button">My Courses</button></a>
+    <a href="${pageContext.request.contextPath}/myMeetups"><button class="button">My Meetups</button></a>
+    <a href="${pageContext.request.contextPath}/studentPortal"><button class="button">More</button></a>
+    <a href="${pageContext.request.contextPath}/logout"><button class="button">Logout</button></a>
+    <% } %>
+    
+    <% if (!request.isUserInRole("student")) { %>
+
+    <h2>Login </h2>
         <div class="large-3 large-centered columns">
             <div class="login-box">
                 <div class="row">
@@ -27,5 +39,7 @@
                 </div>
             </div>
         </div>
+    <% } %>
+   
 </center>
     <%@include file="/footer.jspf" %>
