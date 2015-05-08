@@ -2,8 +2,8 @@
 <%@include file="/header.jspf" %>
 <center>
 
-    <c:if test="${not empty requestScope.studentmessage}">
-        <h2>${requestScope.studentmessage}</h2>
+    <c:if test="${not empty requestScope.message}">
+        <h2>${requestScope.message}</h2>
         <h2><a href="login.jsp">Click Here</a> to Log In!</h2>
     </c:if>
         <form action="${pageContext.request.contextPath}/newUser" method="get">

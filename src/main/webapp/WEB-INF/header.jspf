@@ -32,6 +32,7 @@
                         <ul class="dropdown">
                             <li><a href="${pageContext.request.contextPath}/studentPortal">My Profile</a></li>
                             <li><a href="${pageContext.request.contextPath}/myCourses">My Courses</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewAllCourses">View All Courses</a></li>
                             <c:if test="${requestScope.usertype == 1}">
                             <li><a href="${pageContext.request.contextPath}/newCourse">Add Course</a></li>
                             </c:if>
@@ -42,6 +43,7 @@
 
                      <li class="has-dropdown"><a href="#">Meetups</a>
                         <ul class="dropdown">
+                            <li><a href="${pageContext.request.contextPath}/viewAllMeetups">View All Meetups</a></li>
                             <li><a href="${pageContext.request.contextPath}/myMeetups">My Meetups</a></li>
                             <li><a href="${pageContext.request.contextPath}/joinMeetup">Join Meetup</a></li>
                             <li><a href="${pageContext.request.contextPath}/newMeetup">Add New Meetup</a></li>

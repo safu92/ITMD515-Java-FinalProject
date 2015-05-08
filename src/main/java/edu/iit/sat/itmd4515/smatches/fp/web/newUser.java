@@ -5,6 +5,7 @@
  */
 package edu.iit.sat.itmd4515.smatches.fp.web;
 
+import edu.iit.sat.itmd4515.smatches.fp.domain.Professor;
 import edu.iit.sat.itmd4515.smatches.fp.domain.Student;
 import edu.iit.sat.itmd4515.smatches.fp.domain.University;
 import edu.iit.sat.itmd4515.smatches.fp.domain.security.Group;
@@ -15,7 +16,6 @@ import edu.iit.sat.itmd4515.smatches.fp.service.StudentService;
 import edu.iit.sat.itmd4515.smatches.fp.service.UniversityService;
 import edu.iit.sat.itmd4515.smatches.fp.service.UserService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -90,7 +90,24 @@ if(userType.equals("Student")){
     
     userService.create(user);
     studentService.create(s);
-    request.setAttribute("studentmessage", "Account Created!");
+    request.setAttribute("message", "Account Created!");
+    request.getRequestDispatcher("/newAccount.jsp").forward(request, response);
+}
+
+else if(userType.equals("Professor")){
+    Group group = groupService.findByName("PROFESSOR");
+    user.addGroup(group);
+    Professor p = new Professor();
+    University u = uniService.findByName(university);
+    p.setFirstName(firstName);
+    p.setLastName(lastName);
+    p.setUniversity(u);
+    p.setBirthDate(birth);
+    p.setUser(user);
+    
+    userService.create(user);
+    professorService.create(p);
+    request.setAttribute("message", "Account Created!");
     request.getRequestDispatcher("/newAccount.jsp").forward(request, response);
 }
     }

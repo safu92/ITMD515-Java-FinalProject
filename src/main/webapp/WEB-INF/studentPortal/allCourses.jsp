@@ -1,7 +1,7 @@
 <%@include file="/WEB-INF/header.jspf" %>
 <center>
     
-        <h1>My Courses</h1>
+        <h1>All Available Courses</h1>
         <table role="grid">
     <thead>
         <tr>

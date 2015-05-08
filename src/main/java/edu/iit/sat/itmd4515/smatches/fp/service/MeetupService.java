@@ -6,6 +6,7 @@
 package edu.iit.sat.itmd4515.smatches.fp.service;
 
 import edu.iit.sat.itmd4515.smatches.fp.domain.Meetup;
+import edu.iit.sat.itmd4515.smatches.fp.domain.Professor;
 import edu.iit.sat.itmd4515.smatches.fp.domain.Student;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -73,4 +74,8 @@ public class MeetupService {
      * @return
      */
 
+    
+     public Meetup findByTopic(String topic) {
+        return em.createNamedQuery("Meetup.findByTopic",Meetup.class).setParameter("topic", topic).getSingleResult();
+    }
 }

@@ -25,7 +25,8 @@ import javax.persistence.TemporalType;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Meetup.findById", query = "select m from Meetup m where m.id = :id"),
-    @NamedQuery(name = "Meetup.findAll", query = "select m from Meetup m")})
+    @NamedQuery(name = "Meetup.findAll", query = "select m from Meetup m"),
+    @NamedQuery(name = "Meetup.findByTopic", query = "select m from Meetup m where m.topic = :topic"),})
 public class Meetup extends BaseEntity implements Serializable{
 
     /**

@@ -5,26 +5,27 @@
  */
 package edu.iit.sat.itmd4515.smatches.fp.web;
 
+import edu.iit.sat.itmd4515.smatches.fp.domain.Course;
+import edu.iit.sat.itmd4515.smatches.fp.domain.Meetup;
 import edu.iit.sat.itmd4515.smatches.fp.domain.Student;
 import edu.iit.sat.itmd4515.smatches.fp.service.MeetupService;
 import edu.iit.sat.itmd4515.smatches.fp.service.StudentService;
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static jdk.nashorn.internal.codegen.Compiler.LOG;
 
 /**
  *
  * @author smatches
  */
-@WebServlet(name = "newMeetup", urlPatterns = {"/newMeetup","/newMeetup/"})
-public class newMeetup extends HttpServlet {
+@WebServlet(name = "jointhisMeetup", urlPatterns = {"/jointhisMeetup","/jointhisMeetup/"})
+public class jointhisMeetup extends HttpServlet {
 
     @EJB
     private MeetupService meetupService;
@@ -41,14 +42,23 @@ public class newMeetup extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
-        Student s = studentService.findByUsername(request.getRemoteUser());
-        request.setAttribute("user",s.getUser().getUserName());
+            throws ServletException, IOException {
+         if (request.isUserInRole("student")) {
+                        List<Meetup> meetups = meetupService.findAll();
+                Student s = studentService.findByUsername(request.getRemoteUser());
+                Meetup m = meetupService.findByTopic(request.getParameter("meetup"));
+                LOG.info(m.getTopic());
+       s.getMeetups().add(m);
+       m.getStudents().add(s);
+       studentService.update(s);
+       request.setAttribute("message", "Meetup Joined Successfully!");
+       request.setAttribute("user",s.getUser().getUserName());
        request.setAttribute("usertype","1");
-         request.getRequestDispatcher("/WEB-INF/meetupPortal/newMeetup.jsp").forward(request, response);
-   
+       request.setAttribute("meetups", meetups);
+       request.getRequestDispatcher("/WEB-INF/studentPortal/joinMeetup.jsp").forward(request, response);
+
     }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -62,11 +72,7 @@ public class newMeetup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(newMeetup.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -80,11 +86,7 @@ public class newMeetup extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(newMeetup.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
