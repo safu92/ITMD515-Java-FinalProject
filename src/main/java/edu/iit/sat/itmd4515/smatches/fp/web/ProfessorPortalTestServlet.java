@@ -45,6 +45,7 @@ public class ProfessorPortalTestServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        //show professor profile deetails
                        if (request.isUserInRole("professor")) {
              Professor p = professorService.findByUsername(request.getRemoteUser());
         response.setContentType("text/html");

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ALLAH
+ * @author smatches
  */
 @WebServlet(name = "NewAccount", urlPatterns = {"/newAccount","/newAccount/"})
 public class NewAccount extends HttpServlet {
@@ -41,7 +41,7 @@ public class NewAccount extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     
-        
+        //redirect to jsp page to create new account and render all universities to select from dropdown
             List<University> u = uniservice.findAll();
         response.setContentType("text/html");
         request.setAttribute("universities", u);

@@ -45,6 +45,7 @@ public class UniversityRender extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //admin page to add,update and delete university
                     if (request.isUserInRole("admin")) {
                         if(request.getParameter("uniname") != null){
                             String uniName = request.getParameter("uniname");

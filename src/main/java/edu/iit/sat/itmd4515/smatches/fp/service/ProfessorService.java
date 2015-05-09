@@ -29,31 +29,31 @@ public class ProfessorService {
     }
 
     /**
-     * create student
-     * @param s
+     * create professor
+     * @param p
      */
     public void create(Professor p) {
         em.persist(p);
     }
 
     /**
-     * update student
-     * @param s
+     * update professor
+     * @param p
      */
     public void update(Professor p) {
         em.merge(p);
     }
 
     /**
-     * remove student
-     * @param s
+     * remove professor
+     * @param p
      */
     public void remove(Professor p) {
         em.remove(p);
     }
 
     /**
-     * find student by its id
+     * find prof by its id
      * @param id
      * @return
      */

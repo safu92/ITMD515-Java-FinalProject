@@ -69,4 +69,8 @@
         <description/>
         <role-name>student</role-name>
     </security-role>
+    
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

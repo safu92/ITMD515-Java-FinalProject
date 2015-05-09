@@ -32,8 +32,8 @@
                         <ul class="dropdown">
                             <li><a href="${pageContext.request.contextPath}/studentPortal">My Profile</a></li>
                             <li><a href="${pageContext.request.contextPath}/myCourses">My Courses</a></li>
-                            <li><a href="${pageContext.request.contextPath}/viewAllCourses">View All Courses</a></li>
                             <c:if test="${requestScope.usertype == 1}">
+                            <li><a href="${pageContext.request.contextPath}/viewAllCourses">View All Courses</a></li>
                             <li><a href="${pageContext.request.contextPath}/newCourse">Add Course</a></li>
                             </c:if>
                         </ul>

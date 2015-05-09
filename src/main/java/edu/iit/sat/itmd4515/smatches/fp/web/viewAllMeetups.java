@@ -42,6 +42,7 @@ public class viewAllMeetups extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //view all the meetups and pass it to the jsp page
                                List<Meetup> meetups = meetupService.findAll();
                                         Student s = studentService.findByUsername(request.getRemoteUser());
                                                request.setAttribute("user",s.getUser().getUserName());

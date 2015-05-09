@@ -28,31 +28,31 @@ public class GroupService {
     }
 
     /**
-     * create student
-     * @param s
+     * create group
+     * @param g
      */
     public void create(Group g) {
         em.persist(g);
     }
 
     /**
-     * update student
-     * @param s
+     * update group
+     * @param g
      */
     public void update(Group g) {
         em.merge(g);
     }
 
     /**
-     * remove student
-     * @param s
+     * remove group
+     * @param g
      */
     public void remove(Group g) {
         em.remove(g);
     }
 
     /**
-     * find student by its id
+     * find group by its id
      * @param id
      * @return
      */
@@ -61,7 +61,7 @@ public class GroupService {
     }
 
     /**
-     * find all method which finds all students
+     * find all method which finds all groups
      * @return
      */
     public List<Group> findAll() {
@@ -71,7 +71,7 @@ public class GroupService {
 
     /**
      * find by username which finds user by its username
-     * @param userName username passed which needs to be find
+     * @param name
      * @return the student which found
      */
     public Group findByName(String name) {

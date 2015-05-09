@@ -42,6 +42,7 @@ public class viewAllCourses extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //view all the courses and pass to jsp page
                                List<Course> courses = courseService.findAll();
                                         Student s = studentService.findByUsername(request.getRemoteUser());
                                                request.setAttribute("user",s.getUser().getUserName());

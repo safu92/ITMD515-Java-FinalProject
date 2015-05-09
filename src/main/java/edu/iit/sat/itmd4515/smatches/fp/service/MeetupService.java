@@ -29,31 +29,31 @@ public class MeetupService {
     }
 
     /**
-     * create student
-     * @param s
+     * create meetup
+     * @param m
      */
     public void create(Meetup m) {
         em.persist(m);
     }
 
     /**
-     * update student
-     * @param s
+     * update meetup
+     * @param m
      */
     public void update(Meetup m) {
         em.merge(m);
     }
 
     /**
-     * remove student
-     * @param s
+     * remove meetup
+     * @param m
      */
     public void remove(Meetup m) {
         em.remove(m);
     }
 
     /**
-     * find student by its id
+     * find meetup by its id
      * @param id
      * @return
      */
@@ -62,20 +62,21 @@ public class MeetupService {
     }
 
     /**
-     * find all method which finds all students
+     * find all method which finds all meetups
      * @return
      */
     public List<Meetup> findAll() {
         return em.createNamedQuery("Meetup.findAll",
                 Meetup.class).getResultList();
     }
+    
+
     /**
-     * find all method which finds all the meetup
+     * find by topic method which finds all the meetup
+     * @param topic
      * @return
      */
-
-    
-     public Meetup findByTopic(String topic) {
+    public Meetup findByTopic(String topic) {
         return em.createNamedQuery("Meetup.findByTopic",Meetup.class).setParameter("topic", topic).getSingleResult();
     }
 }

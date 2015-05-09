@@ -30,13 +30,13 @@
                 <% if (request.isUserInRole("admin")){ %>
                 
                 <ul class="left">
-                    <li class="has-dropdown"><a href="#">Course</a>
-                        <ul class="dropdown">
-                            <li><a href="${pageContext.request.contextPath}/courseAdmin">Add</a></li>
-                            <li><a href="${pageContext.request.contextPath}/deleteCourseAdmin">Delete</a></li>
-                        </ul>
+                    <li><a href="${pageContext.request.contextPath}/courseAdmin">Course Panel</a>
                     </li>
-                    <li><a href="${pageContext.request.contextPath}/newAccount">Create New Account</a>
+                    
+                     <li><a href="${pageContext.request.contextPath}/uniAdmin">University Panel</a>
+                    </li>
+                    
+                    <li><a href="${pageContext.request.contextPath}/logout">Logout</a>
                     </li>
                 </ul>
                     <% } %>

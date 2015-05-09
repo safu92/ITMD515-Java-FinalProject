@@ -33,21 +33,9 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         //remove the user
         request.logout();
-        
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LogoutServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>You are logged out!  <br><br> LogoutServlet at " + request.getContextPath() + "</h1>");
-            out.println("<a href=\'" + request.getContextPath() + "/studentPortal/\'>Login</a>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        //render login page again
+        response.setContentType("text/html");
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

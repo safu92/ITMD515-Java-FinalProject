@@ -1,7 +1,13 @@
 <%@include file="/WEB-INF/header.jspf" %>
 <center>
     
+    <c:if test="${requestScope.usertype == 1}">
         <h1>My Courses</h1>
+    </c:if>
+    
+        <c:if test="${requestScope.usertype == 2}">
+        <h1>Courses I teach:</h1>
+        </c:if>
         <table role="grid">
     <thead>
         <tr>

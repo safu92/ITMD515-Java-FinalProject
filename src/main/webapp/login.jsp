@@ -11,7 +11,21 @@
     <a href="${pageContext.request.contextPath}/logout"><button class="button">Logout</button></a>
     <% } %>
     
-    <% if (!request.isUserInRole("student")) { %>
+     <% if (request.isUserInRole("professor")) { %>
+    <h2>Welcome <% out.println(request.getRemoteUser()); %></h2>
+    <a href="${pageContext.request.contextPath}/professorPortal"><button class="button">My Profile</button></a>
+    <a href="${pageContext.request.contextPath}/myCourses"><button class="button">My Courses</button></a>
+    <a href="${pageContext.request.contextPath}/logout"><button class="button">Logout</button></a>
+    <% } %>
+    
+     <% if (request.isUserInRole("admin")) { %>
+    <h2>Welcome <% out.println(request.getRemoteUser()); %></h2>
+    <a href="${pageContext.request.contextPath}/courseAdmin"><button class="button">Course Panel</button></a>
+    <a href="${pageContext.request.contextPath}/uniAdmin"><button class="button">University Panel</button></a>
+    <a href="${pageContext.request.contextPath}/logout"><button class="button">Logout</button></a>
+    <% } %>
+    
+    <% if ((!request.isUserInRole("student")) && (!request.isUserInRole("admin")) && (!request.isUserInRole("professor"))) { %>
 
     <h2>Login </h2>
         <div class="large-3 large-centered columns">
@@ -35,6 +49,12 @@
                                 </div>
                             </div>
                         </form>
+                        
+                        <div class="row">
+                                <div class="large-12 large-centered columns">
+                                    <a href="${pageContext.request.contextPath}/newAccount"><button class="button">Create New Account</button></a>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

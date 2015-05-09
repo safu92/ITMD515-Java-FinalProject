@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ALLAH
+ * @author smatches
  */
 @WebServlet(name = "MeetupPortal", urlPatterns = {"/myMeetups","/myMeetups/"})
 public class MeetupPortal extends HttpServlet {
@@ -42,6 +42,7 @@ public class MeetupPortal extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
        
+        //show all the meetups to the user
             if (request.isUserInRole("student")) {
                 Student s = studentService.findByUsername(request.getRemoteUser());
                 response.setContentType("text/html");
@@ -52,14 +53,27 @@ public class MeetupPortal extends HttpServlet {
             }
         }
     
-    
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
      
-      @Override
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);

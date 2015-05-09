@@ -43,6 +43,7 @@ public class jointhisMeetup extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //getting all the parameters of selected meetup and adding it to users account
          if (request.isUserInRole("student")) {
                         List<Meetup> meetups = meetupService.findAll();
                 Student s = studentService.findByUsername(request.getRemoteUser());

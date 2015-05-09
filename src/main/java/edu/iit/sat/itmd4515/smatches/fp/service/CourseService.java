@@ -28,7 +28,7 @@ public class CourseService {
     }
 
     /**
-     * create student
+     * create course
      * @param c
      */
     public void create(Course c) {
@@ -36,23 +36,23 @@ public class CourseService {
     }
 
     /**
-     * update student
-     * @param s
+     * update course
+     * @param c
      */
     public void update(Course c) {
         em.merge(c);
     }
 
     /**
-     * remove student
-     * @param s
+     * remove course
+     * @param c
      */
     public void remove(Course c) {
         em.remove(c);
     }
 
     /**
-     * find student by its id
+     * find course by its id
      * @param id
      * @return
      */
@@ -61,7 +61,7 @@ public class CourseService {
     }
 
     /**
-     * find all method which finds all students
+     * find all method which finds all courses
      * @return
      */
     public List<Course> findAll() {
@@ -69,8 +69,12 @@ public class CourseService {
                 Course.class).getResultList();
     }
 
-    
-     public Course findByName(String name) {
+    /**
+     * find course by name
+     * @param name
+     * @return
+     */
+    public Course findByName(String name) {
         return em.createNamedQuery("Course.findByName",
                 Course.class)
                 .setParameter("name", name)

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ALLAH
+ * @author smatches
  */
 @WebServlet(name = "newCourse", urlPatterns = {"/newCourse","/newCourse/"})
 public class newCourse extends HttpServlet {
@@ -42,6 +42,7 @@ public class newCourse extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //getting all the details of the course and adding to user account
             if (request.isUserInRole("student")) {
                 Student s = studentService.findByUsername(request.getRemoteUser());
         List<Course> c = courseService.findAll();

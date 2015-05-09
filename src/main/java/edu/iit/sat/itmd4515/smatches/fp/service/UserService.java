@@ -28,31 +28,31 @@ public class UserService{
     }
 
     /**
-     * create student
-     * @param s
+     * create User
+     * @param u
      */
     public void create(User u) {
         em.persist(u);
     }
 
     /**
-     * update student
-     * @param s
+     * update user
+     * @param u
      */
     public void update(User u) {
         em.merge(u);
     }
 
     /**
-     * remove student
-     * @param s
+     * remove User
+     * @param u
      */
     public void remove(User u) {
         em.remove(u);
     }
 
     /**
-     * find student by its id
+     * find user by its id
      * @param id
      * @return
      */

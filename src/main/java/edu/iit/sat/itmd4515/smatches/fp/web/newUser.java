@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ALLAH
+ * @author smatches
  */
 @WebServlet(name = "newUser", urlPatterns = {"/newUser","/newUser/"})
 public class newUser extends HttpServlet {
@@ -58,9 +58,13 @@ public class newUser extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.text.ParseException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
+        
+        //getting details from the form and creating a new user and adding to student or professor table
+        //according to the filled form
         response.setContentType("text/html;charset=UTF-8");
     
         String username = request.getParameter("username");

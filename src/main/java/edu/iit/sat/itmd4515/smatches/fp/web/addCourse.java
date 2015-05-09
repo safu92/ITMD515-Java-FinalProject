@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ALLAH
+ * @author smatches
  */
 @WebServlet(name = "addCourse", urlPatterns = {"/addCourse","/addCourse/"})
 public class addCourse extends HttpServlet {
@@ -46,6 +46,8 @@ public class addCourse extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //add the course to the users account
                     if (request.isUserInRole("student")) {
                         List<Course> courses = courseService.findAll();
                 Student s = studentService.findByUsername(request.getRemoteUser());

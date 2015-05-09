@@ -43,10 +43,11 @@ public class addMeetup extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.text.ParseException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
-        
+        //add meetup by getting all parameters
         String date = request.getParameter("date");
         String place = request.getParameter("place");
     String topic = request.getParameter("topic");

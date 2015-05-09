@@ -43,6 +43,7 @@ public class joinMeetup extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //allow user to join meetup by rendering all meetups in dropdown menu
         if (request.isUserInRole("student")) {
                 Student s = studentService.findByUsername(request.getRemoteUser());
         List<Meetup> m = meetupService.findAll();

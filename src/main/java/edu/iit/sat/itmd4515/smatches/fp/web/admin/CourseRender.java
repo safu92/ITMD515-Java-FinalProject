@@ -47,6 +47,7 @@ public class CourseRender extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //admin page to add,update, delete courses
                     if (request.isUserInRole("admin")) {
                         if(request.getParameter("courseId") != null){
                             String courseId = request.getParameter("courseId");

@@ -45,6 +45,7 @@ public class StudentPortalTestServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
+        //show student profile details
             if (request.isUserInRole("student")) {
              Student s = studentService.findByUsername(request.getRemoteUser());
         response.setContentType("text/html");

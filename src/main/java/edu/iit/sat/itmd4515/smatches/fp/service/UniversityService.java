@@ -28,15 +28,16 @@ public class UniversityService {
     }
 
     /**
-     * create student
-     * @param s
+     * create university
+     * @param u
      */
     public void create(University u) {
         em.persist(u);
     }
 
     /**
-     * update student
+     * update university
+     * @param u
      * @param s
      */
     public void update(University u) {
@@ -44,15 +45,15 @@ public class UniversityService {
     }
 
     /**
-     * remove student
-     * @param s
+     * remove university
+     * @param u
      */
     public void remove(University u) {
         em.remove(u);
     }
 
     /**
-     * find student by its id
+     * find university by its id
      * @param id
      * @return
      */
@@ -70,9 +71,9 @@ public class UniversityService {
     }
 
     /**
-     * find by username which finds user by its username
-     * @param userName username passed which needs to be find
-     * @return the student which found
+     * find university by its name
+     * @param name
+     * @return the university which found
      */
     public University findByName(String name) {
         return em.createNamedQuery("University.findByName",
